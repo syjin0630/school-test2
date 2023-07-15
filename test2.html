@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>식사 타임라인</title>
+    <style>
+        @font-face {
+            font-family: 'PartialSansKR-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/PartialSansKR-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'PartialSansKR-Regular', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #e1eff6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #ff6f91;
+            margin-bottom: 20px;
+            font-family: 'PartialSansKR-Regular', sans-serif;
+        }
+
+        .time-input {
+            width: 200px;
+            height: 40px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .food-input {
+            width: 250px;
+            height: 40px;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .submit-button {
+            width: 120px;
+            height: 40px;
+            background-color: #ff6f91;
+            color: #ffffff;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .timeline {
+            margin-top: 20px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #ffffff;
+            border-radius: 5px;
+        }
+
+        .time {
+            color: #ff6f91;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .food {
+            color: #009ddc;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        th {
+            background-color: #ff6f91;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>식사 타임라인</h1>
+        <input type="text" class="time-input" id="timeInput" placeholder="시간 (예: 12:30)">
+        <input type="text" class="food-input" id="foodInput" placeholder="음식">
+        <button class="submit-button" onclick="addTimelineItem()">추가하기</button>
+        <div class="timeline" id="timeline"></div>
+        <table id="timelineTable">
+            <thead>
+                <tr>
+                    <th>시간</th>
+                    <th>음식</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        function addTimelineItem() {
+            var timeInput = document.getElementById("timeInput").value;
+            var foodInput = document.getElementById("foodInput").value;
+            var timeline = document.getElementById("timeline");
+            var timelineTable = document.getElementById("timelineTable").getElementsByTagName("tbody")[0];
+
+            if (timeInput && foodInput) {
+                var item = document.createElement("div");
+                item.className = "timeline-item";
+                item.innerHTML = "<span class='time'>" + timeInput + "</span><span class='food'>" + foodInput + "</span>";
+                timeline.appendChild(item);
+
+                var row = document.createElement("tr");
+                var timeCell = document.createElement("td");
+                var foodCell = document.createElement("td");
+                timeCell.innerText = timeInput;
+                foodCell.innerText = foodInput;
+                row.appendChild(timeCell);
+                row.appendChild(foodCell);
+                timelineTable.appendChild(row);
+            }
+
+            document.getElementById("timeInput").value = "";
+            document.getElementById("foodInput").value = "";
+        }
+    </script>
+</body>
+</html>
+
+
